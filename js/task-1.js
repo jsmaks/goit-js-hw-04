@@ -1,15 +1,26 @@
+const account = {
+    owner: 'Mango',
+    balance: 24000,
+    discount: 0.1,
+    orders: ['order-1', 'order-2', 'order-3'],
+    changeDiscount(value) {
+        this.discount = value;
 
-const user = {
-    name: 'Mango',
-    age: 20,
-    hobby: 'html',
-    premium: true,
+    },
+    showOrders() {
+        return this.orders;
+    },
+    addOrder(cost, order) {
+        this.balance -= cost;
+        this.orders.push(order);
+    },
 };
-user.mode = "happy";
-user.hobby = "skydiving"
-user.premium = false;
 
-const keys = Object.keys(user);
-for (const key of keys) {
-    console.log(`${key}:`, user[key]);
-}
+account.changeDiscount(0.15);
+console.log(account.discount); // 0.15
+
+console.table(account.showOrders()); // ['order-1', 'order-2', 'order-3']
+
+account.addOrder(5000, 'order-4');
+console.log(account.balance); // 19000
+console.table(account.showOrders()); // ['order-1', 'order-2', 'order-3', 'order-4']
